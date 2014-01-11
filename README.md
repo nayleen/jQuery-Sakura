@@ -8,7 +8,7 @@ Uses CSS3 animations and requestAnimationFrame to put a plethora of cherry bloss
 
 ## Installation
 
-Download and put the files however you're structuring your asset folder, be sure to use the right paths when including the files in your site.
+Download and add the files to your asset folder, be sure to use the right paths when including the files in your site.
 
 ## Basic Usage
 
@@ -45,6 +45,7 @@ You're able to change some parameters by passing an option object to the sakura 
                 ...
             ],                   // Horizontal movement animation names
             className: 'sakura', // Class name to use
+            fallSpeed: 1,        // Factor for petal fall speed
             maxSize: 14,         // Maximum petal size
             minSize: 9,          // Minimum petal size
             newOn: 300,          // Interval after which a new petal is added
@@ -58,4 +59,4 @@ You're able to change some parameters by passing an option object to the sakura 
 
 ## Live Demo
 
-You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/8/).
+You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/9/).
