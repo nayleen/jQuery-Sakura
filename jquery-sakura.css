@@ -784,5 +784,10 @@
     -ms-border-radius: 12px 1px;
     -moz-border-radius: 12px 1px;
     border-radius: 12px 1px;
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -ms-pointer-events: none;
+    -o-pointer-events: none;
+    pointer-events: none;
     position: absolute
 }
