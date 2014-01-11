@@ -15,22 +15,22 @@ Download and add the files to your asset folder, be sure to use the right paths 
 Simply include both the css and js file in your HTML and run the sakura() function added by this plugin on domReady or windowLoad:
 
 ```html
-    <!-- In your HTML head -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/css/jquery-sakura.min.css" />
+<!-- In your HTML head -->
+<link type="text/css" rel="stylesheet" media="screen" href="/css/jquery-sakura.min.css" />
 
-    <!-- End of your HTML body -->
-    <script src="/js/jquery-sakura.min.js"></script>
-    <script>
-        // domReady
-        $(function() {
-            $.fn.sakura();
-        });
+<!-- End of your HTML body -->
+<script src="/js/jquery-sakura.min.js"></script>
+<script>
+    // domReady
+    $(function() {
+        $.fn.sakura();
+    });
 
-        // windowLoad
-        $(window).load(function() {
-            $.fn.sakura();
-        });
-    </script>
+    // windowLoad
+    $(window).load(function() {
+        $.fn.sakura();
+    });
+</script>
 ```
 
 ## Configuration
@@ -38,23 +38,23 @@ Simply include both the css and js file in your HTML and run the sakura() functi
 You're able to change some parameters by passing an option object to the sakura function:
 
 ```js
-    $(window).load(function() {
-        $.fn.sakura({
-            blowAnimations: [
-                'blow-soft-left',
-                ...
-            ],                   // Horizontal movement animation names
-            className: 'sakura', // Class name to use
-            fallSpeed: 1,        // Factor for petal fall speed
-            maxSize: 14,         // Maximum petal size
-            minSize: 9,          // Minimum petal size
-            newOn: 300,          // Interval after which a new petal is added
-            swayAnimations: [    // Swaying animation names
-                'sway-0',
-                ...
-            ]
-        });
+$(window).load(function() {
+    $.fn.sakura({
+        blowAnimations: [
+            'blow-soft-left',
+            ...
+        ],                   // Horizontal movement animation names
+        className: 'sakura', // Class name to use
+        fallSpeed: 1,        // Factor for petal fall speed
+        maxSize: 14,         // Maximum petal size
+        minSize: 9,          // Minimum petal size
+        newOn: 300,          // Interval after which a new petal is added
+        swayAnimations: [    // Swaying animation names
+            'sway-0',
+            ...
+        ]
     });
+});
 ```
 
 ## Live Demo
