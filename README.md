@@ -40,12 +40,18 @@ You're able to change some parameters by passing an option object to the sakura 
 ```js
     $(window).load(function() {
         $.fn.sakura({
-            blowAnimations: [ ... ], // Array of animations that influence horizontal movement
-            className: 'sakura',     // Class name to use
-            maxSize: 14,             // Maximum petal size
-            minSize: 9,              // Minimum petal size
-            newOn: 300,              // Interval after which a new petal is added
-            swayAnimations: [ ... ]  // Array of animations that influence petal sway in the "wind"
+            blowAnimations: [
+                'blow-soft-left',
+                ...
+            ],                   // Horizontal movement animation names
+            className: 'sakura', // Class name to use
+            maxSize: 14,         // Maximum petal size
+            minSize: 9,          // Minimum petal size
+            newOn: 300,          // Interval after which a new petal is added
+            swayAnimations: [    // Swaying animation names
+                'sway-0',
+                ...
+            ]
         });
     });
 ```
