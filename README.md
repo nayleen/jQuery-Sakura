@@ -63,4 +63,4 @@ You can view a live preview of the most recent version of the plugin [here](http
 
 ## Credits
 
-Originally thought up and commissioned by Sakuma Mayumi.
+Originally thought up and commissioned by Naomi Forame.
