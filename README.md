@@ -60,3 +60,7 @@ $(window).load(function() {
 ## Live Demo
 
 You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/9/).
+
+## Credits
+
+Originally thought up and commissioned by Sakuma Mayumi.
