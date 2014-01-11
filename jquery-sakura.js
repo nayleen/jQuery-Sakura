@@ -1,6 +1,34 @@
-var $sakuraInterval = null;
-
 (function ($) {
+    // requestAnimationFrame Polyfill
+    (function () {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame)
+            window.requestAnimationFrame = function (callback, element) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                var id = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    },
+                    timeToCall);
+                lastTime = currTime + timeToCall;
+
+                return id;
+            };
+
+        if (!window.cancelAnimationFrame)
+            window.cancelAnimationFrame = function (id) {
+                clearTimeout(id);
+            };
+    }());
+
+    // Sakura function.
     $.fn.sakura = function (options) {
         // We rely on these random values a lot, so define a helper function for it.
         function getRandomInt(min, max) {
@@ -43,10 +71,14 @@ var $sakuraInterval = null;
 
         // Function that inserts new petals into the document.
         var petalCreator = function () {
+            setTimeout(function () {
+                requestAnimationFrame(petalCreator);
+            }, options.newOn);
+
             // Get one random animation of each type and randomize fall time of the petals.
             var blowAnimation = options.blowAnimations[Math.floor(Math.random() * options.blowAnimations.length)];
             var swayAnimation = options.swayAnimations[Math.floor(Math.random() * options.swayAnimations.length)];
-            var fallTime = Math.round(documentHeight * 0.0088) + Math.random() * 5;
+            var fallTime = Math.round(documentHeight * 0.007) + Math.random() * 5;
 
             var animations = 'fall ' + fallTime + 's linear 0s 1' + ', ' +
                 blowAnimation + ' ' + (((fallTime > 30 ? fallTime : 30) - 20) + getRandomInt(0, 20)) + 's linear 0s infinite' + ', ' +
@@ -83,15 +115,6 @@ var $sakuraInterval = null;
                 .appendTo('body');
         };
 
-        // Prevent the Wall of Petally Death(TM) by clearing the interval ...
-        $(window).blur(function () {
-            clearInterval($sakuraInterval);
-        });
-
-        // ... and restart it on window focus.
-        $(window).focus(function () {
-            $sakuraInterval = setInterval(petalCreator, options.newOn);
-        });
 
         // Recalculate documentHeight and documentWidth on browser resize.
         $(window).resize(function () {
@@ -99,7 +122,7 @@ var $sakuraInterval = null;
             documentWidth = $(document).width();
         });
 
-        // Finally: Create interval that constantly creates new petals.
-        $sakuraInterval = setInterval(petalCreator, options.newOn);
+        // Finally: Start adding petals.
+        requestAnimationFrame(petalCreator);
     };
-})(jQuery);
+}(jQuery));
