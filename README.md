@@ -67,7 +67,7 @@ $(window).load(function() {
 
 ## Live Demo
 
-You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/20/).
+You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/21/).
 
 ## Credits
 
