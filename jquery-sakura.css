@@ -338,8 +338,6 @@
 .sakura {
     background: -webkit-linear-gradient(120deg, rgba(255, 183, 197, 0.9), rgba(255, 197, 208, 0.9));
     background: linear-gradient(120deg, rgba(255, 183, 197, 0.9), rgba(255, 197, 208, 0.9));
-    -webkit-border-radius: 12px 1px;
-    border-radius: 12px 1px;
     pointer-events: none;
     position: absolute
 }

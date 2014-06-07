@@ -83,7 +83,7 @@
             className: 'sakura',
             fallSpeed: 1,
             maxSize: 14,
-            minSize: 9,
+            minSize: 10,
             newOn: 300,
             swayAnimations: ['sway-0', 'sway-1', 'sway-2', 'sway-3', 'sway-4', 'sway-5', 'sway-6', 'sway-7', 'sway-8']
         };
@@ -116,12 +116,13 @@
                         swayAnimation + ' ' + randomInt(2, 4) + 's linear 0s infinite';
 
                 // Create petal and randomize size
-                var petal = $('<div class="' + options.className + '" />');
-                var size  = randomInt(options.minSize, options.maxSize);
+                var petal  = $('<div class="' + options.className + '" />');
+                var height = randomInt(options.minSize, options.maxSize);
+                var width  = height - Math.floor(randomInt(0, options.minSize) / 3);
 
                 // Apply Event Listener to remove petals that reach the bottom of the page
                 petal.prefixedEvent('AnimationEnd', function () {
-                    if (!elementInViewport(this)) {
+                    if ( ! elementInViewport(this)) {
                         $(this).remove();
                     }
                 })
@@ -132,7 +133,7 @@
                             $.inArray(ev.animationName, options.blowAnimations) != -1 ||
                             $.inArray(ev.animationName, options.swayAnimations) != -1
                         ) &&
-                        !elementInViewport(this)
+                        ! elementInViewport(this)
                     ) {
                         $(this).remove();
                     }
@@ -140,10 +141,11 @@
                 .css({
                     '-webkit-animation': animations,
                     animation: animations,
-                    height: size + 'px',
+                    'border-radius': randomInt(options.maxSize, (options.maxSize + Math.floor(Math.random() * 10))) + 'px ' + randomInt(1, Math.floor(width / 4)) + 'px',
+                    height: height + 'px',
                     left: (Math.random() * document.documentElement.clientWidth - 100) + 'px',
                     'margin-top': (-(Math.floor(Math.random() * 20) + 15)) + 'px',
-                    width: size + 'px'
+                    width: width + 'px'
                 });
 
                 target.append(petal);
