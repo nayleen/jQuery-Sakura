@@ -30,7 +30,7 @@
         };
     }
 
-    // Prefixed event Check
+    // Prefixed event check
     $.fn.prefixedEvent = function(type, callback) {
         for (var x = 0; x < vendorCount; ++x) {
             if ( ! vendors[x]) {
@@ -77,7 +77,7 @@
         // Target element
         var target = this.selector == "" ? $('body') : this;
 
-        // Defaults for the option object, which gets extended below.
+        // Defaults for the option object, which gets extended below
         var defaults = {
             blowAnimations: ['blow-soft-left', 'blow-medium-left', 'blow-soft-right', 'blow-medium-right'],
             className: 'sakura',
@@ -90,10 +90,8 @@
 
         var options = $.extend({}, defaults, options);
 
-        if (typeof event == 'undefined' || event == 'start') {
-
-            // Declarations
-            var sakura = $('<div class="' + options.className + '" />');
+        // Default or start event
+        if (typeof event === 'undefined' || event === 'start') {
 
             // Set the overflow-x CSS property on the target element to prevent horizontal scrollbars
             target.css({ 'overflow-x': 'hidden' });
@@ -106,36 +104,36 @@
                     }, options.newOn);
                 }
 
-                // Get one random animation of each type and randomize fall time of the petals.
+                // Get one random animation of each type and randomize fall time of the petals
                 var blowAnimation = randomArrayElem(options.blowAnimations);
                 var swayAnimation = randomArrayElem(options.swayAnimations);
                 var fallTime = ((document.documentElement.clientHeight * 0.007) + Math.round(Math.random() * 5)) * options.fallSpeed;
 
+                // Build animation
                 var animations =
                     'fall ' + fallTime + 's linear 0s 1' + ', ' +
                         blowAnimation + ' ' + (((fallTime > 30 ? fallTime : 30) - 20) + randomInt(0, 20)) + 's linear 0s infinite' + ', ' +
                         swayAnimation + ' ' + randomInt(2, 4) + 's linear 0s infinite';
 
-                var petal = sakura.clone();
-                var size = randomInt(options.minSize, options.maxSize);
-                var startPosLeft = Math.random() * document.documentElement.clientWidth - 100;
-                var startPosTop = -((Math.random() * 20) + 15);
+                // Create petal and randomize size
+                var petal = $('<div class="' + options.className + '" />');
+                var size  = randomInt(options.minSize, options.maxSize);
 
-                // Apply Event Listener to remove petals that reach the bottom of the page.
+                // Apply Event Listener to remove petals that reach the bottom of the page
                 petal.prefixedEvent('AnimationEnd', function () {
                     if (!elementInViewport(this)) {
                         $(this).remove();
                     }
                 })
-                // Apply Event Listener to remove petals that finish their horizontal float animation.
+                // Apply Event Listener to remove petals that finish their horizontal float animation
                 .prefixedEvent('AnimationIteration', function (ev) {
                     if (
                         (
                             $.inArray(ev.animationName, options.blowAnimations) != -1 ||
-                                $.inArray(ev.animationName, options.swayAnimations) != -1
-                            )
-                            && !elementInViewport(this)
-                        ) {
+                            $.inArray(ev.animationName, options.swayAnimations) != -1
+                        ) &&
+                        !elementInViewport(this)
+                    ) {
                         $(this).remove();
                     }
                 })
@@ -143,20 +141,22 @@
                     '-webkit-animation': animations,
                     animation: animations,
                     height: size + 'px',
-                    left: startPosLeft + 'px',
-                    'margin-top': startPosTop + 'px',
+                    left: (Math.random() * document.documentElement.clientWidth - 100) + 'px',
+                    'margin-top': (-(Math.floor(Math.random() * 20) + 15)) + 'px',
                     width: size + 'px'
                 });
 
                 target.append(petal);
             };
 
-            // Finally: Start adding petals.
-            var animId = requestAnimationFrame(petalCreator);
-            target.data('sakura-anim-id', animId);
+            // Finally: Start adding petals
+            target.data('sakura-anim-id', requestAnimationFrame(petalCreator));
 
-        } else if (event == 'stop') {
+        }
+        // Stop event, which stops the animation loop and removes all current blossoms
+        else if (event === 'stop') {
 
+            // Cancel animation
             var animId = target.data('sakura-anim-id');
 
             if (animId) {
@@ -164,6 +164,7 @@
                 target.data('sakura-anim-id', null);
             }
 
+            // Remove all current blossoms
             setTimeout(function() {
                 $('.' + options.className).remove();
             }, (options.newOn + 50));

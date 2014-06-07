@@ -8,7 +8,7 @@ Uses CSS3 animations and requestAnimationFrame to put a plethora of cherry bloss
 
 ## Installation
 
-Download and add the files to your asset folder, be sure to use the right paths when including the files in your site.
+Download and add the files to your asset folder(s), be sure to use the right paths when including the files in your site.
 
 ## Basic Usage
 
@@ -23,14 +23,22 @@ Simply include both the css and js file in your HTML and run the sakura() functi
 <script>
     // domReady
     $(function() {
-        $.fn.sakura();
+        $('body').sakura();
     });
 
     // windowLoad
     $(window).load(function() {
-        $.fn.sakura();
+        $('body').sakura();
     });
 </script>
+```
+
+If you ever want or need to disable the generation of the petals, run the method again, passing the event name 'stop' to the function:
+
+```js
+$('#stop_sakura').on('click', function() {
+    $('body').sakura('stop');
+});
 ```
 
 ## Configuration
@@ -39,7 +47,7 @@ You're able to change some parameters by passing an option object to the sakura 
 
 ```js
 $(window).load(function() {
-    $.fn.sakura({
+    $('body').sakura('start', {
         blowAnimations: [
             'blow-soft-left',
             ...
@@ -59,7 +67,7 @@ $(window).load(function() {
 
 ## Live Demo
 
-You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/9/).
+You can view a live preview of the most recent version of the plugin [here](http://jsfiddle.net/aKr8D/20/).
 
 ## Credits
 
